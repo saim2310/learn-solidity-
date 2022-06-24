@@ -1,0 +1,48 @@
+pragma solidity ^0.8.12;
+
+
+contract saim {
+    uint256 num;
+    uint256 x;
+    uint256 y;
+
+    string message;
+    uint256 totalamount;
+    address owner= msg.sender;
+    // string[] users;
+    // mapping (address => bool) user;
+
+    constructor(uint256 a)
+{
+    num = a;
+    message = "saim";
+}
+function printMessage() public view returns (string memory )
+{
+    return message;
+}
+function setMessage(string memory newMessage) external payable
+{
+    require(owner== msg.sender,"only owner function ");
+
+    require(msg.value == 10, "please pay 10 wei ");
+    message = newMessage;
+}
+
+function transferownership(address newowner) external 
+{
+    require(owner == msg.sender, "only owner function ");
+    owner = newowner;
+}
+
+function withdrawfunds() external payable
+{
+    require(owner == msg.sender, "only owner function ");
+    uint256 totalbalance = address(this).balance;
+    payable(owner).transfer(totalbalance);
+}
+function total() external payable returns (uint256)
+{
+}
+}
+
